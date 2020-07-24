@@ -1,0 +1,23 @@
+version: '3.5'
+
+services:
+  jupyter:
+    image: jupyter/scipy-notebook:ubuntu-18.04
+    command: ['start-notebook.sh', '--NotebookApp.token=""']
+    user: jovyan
+    environment:
+      JUPYTER_ENABLE_LAB: "true"
+    ports:
+    - 8888:8888
+    networks:
+    - databox
+    volumes:
+    - ../notebooks:/home/jovyan/work/notebooks
+    - develop:/home/jovyan/develop
+
+networks:
+  databox:
+    external: true
+
+volumes:
+  develop:
